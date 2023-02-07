@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ranian.bootBoard.entity.Board;
 import kr.ranian.bootBoard.service.BoardService;
@@ -34,6 +35,12 @@ public class BoardController {
 	public String registerPost(Board vo) {
 		boardService.register(vo);
 		return "redirect:/list";
+	}
+	
+	@GetMapping("/get")
+	public @ResponseBody Board get(Long idx) {
+		Board board = boardService.get(idx);
+		return board;
 	}
 
 }

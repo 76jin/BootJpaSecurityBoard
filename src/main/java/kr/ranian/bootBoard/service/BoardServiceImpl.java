@@ -1,6 +1,7 @@
 package kr.ranian.bootBoard.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void register(Board vo) {
 		boardRepository.save(vo);
+	}
+
+	@Override
+	public Board get(Long idx) {
+		return boardRepository.findById(idx).get();
 	}
 
 }
