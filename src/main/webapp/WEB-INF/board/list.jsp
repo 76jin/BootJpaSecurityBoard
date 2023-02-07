@@ -76,6 +76,9 @@
     			<div class="card" style="min-height: 500px; max-height: 1000px">
     				<div class="card-body">
     					<form id="regForm" action="${contextPath}/register" method="post">
+    					
+    						<input type="hidden" id="idx" name="idx" value = "${vo.idx}" />
+    					
     						<div class="form-group">
     							<label for="title">제목:</label>
     							<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요." />
@@ -116,6 +119,11 @@
 				regForm.submit();
 			} else if (oper === 'reset') {
 				regForm[0].reset();
+			} else if (oper === 'list') {
+				location.href = "${contextPath}/list";
+			} else if (oper === 'remove') {
+				var idx = regForm.find("#idx").val();
+				location.href = "${contextPath}/remove?idx=" + idx;
 			}
 		});
 		
@@ -143,6 +151,7 @@
 		regForm.find("#title").val(vo.title);
 		regForm.find("#content").val(vo.content);
 		regForm.find("#writer").val(vo.writer);
+		regForm.find("#idx").val(vo.idx);
 		
 		regForm.find("input").attr("readOnly", true);
 		regForm.find("textarea").attr("readOnly", true);
