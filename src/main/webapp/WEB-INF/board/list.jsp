@@ -36,7 +36,7 @@
     				<div class="card-body">
     					<h4 class="card-title">GUEST</h4>
     					<p class="card-text">회원님 Welcome!</p>
-    					<form id="" action="" method="post">
+    					<form id="loginForm" action="" method="post">
     						<div class="form-group">
     							<label for="memId">아이디</label>
     							<input type="text" class="form-control" id="memId" name="memId" />
@@ -74,6 +74,24 @@
     		</div>
     		<div class="col-lg-5">
     			<div class="card" style="min-height: 500px; max-height: 1000px">
+    				<div class="card-body">
+    					<form id="regForm" action="${contextPath}/register" method="post">
+    						<div class="form-group">
+    							<label for="title">제목:</label>
+    							<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요." />
+    						</div>
+    						<div class="form-group">
+    							<label for="content">내용:</label>
+    							<textarea class="form-control" rows="9" id="content" name="content"></textarea>
+    						</div>
+    						<div class="form-group">
+    							<label for="writer">작성자:</label>
+    							<input type="text" class="form-control" id="writer" name="writer" placeholder="작성자를 입력하세요." />
+    						</div>
+    						<button type="button" class="btn btn-sm btn-primary">등록</button>
+    						<button type="button" class="btn btn-sm btn-warning">취소</button>
+    					</form>
+    				</div>
     			</div>
     		</div>
     	</div>
