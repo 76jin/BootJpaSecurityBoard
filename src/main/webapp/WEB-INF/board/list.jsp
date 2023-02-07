@@ -88,8 +88,8 @@
     							<label for="writer">작성자:</label>
     							<input type="text" class="form-control" id="writer" name="writer" placeholder="작성자를 입력하세요." />
     						</div>
-    						<button type="button" class="btn btn-sm btn-primary">등록</button>
-    						<button type="button" class="btn btn-sm btn-warning">취소</button>
+    						<button type="button" data-oper="register" class="btn btn-sm btn-primary">등록</button>
+    						<button type="button" data-oper="reset" class="btn btn-sm btn-warning">취소</button>
     					</form>
     				</div>
     			</div>
@@ -99,6 +99,20 @@
     <div class="card-footer">Footer</div>
   </div>
 <!-- </div> -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var regForm = $("#regForm");
+		$("button").on('click', function() {
+			var oper = $(this).data("oper");
+			if (oper === 'register') {
+				regForm.submit();
+			} else if (oper === 'reset') {
+				regForm[0].reset();
+			}
+		});
+	});
+</script>
 
 </body>
 </html>
