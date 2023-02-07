@@ -52,6 +52,24 @@
     		</div>
     		<div class="col-lg-5">
     			<div class="card" style="min-height: 500px; max-height: 1000px">
+    				<div class="card-body">
+    					<table class="table table-hover">
+    						<thead>
+    							<th>번호</th>
+    							<th>제목</th>
+    							<th>작성일</th>
+    						</thead>
+    						<tbody>
+   							<c:forEach var="vo" items="${list}">
+    							<tr>
+    								<td>${vo.idx}</td>
+    								<td>${vo.title}</td>
+    								<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.indate}" /></td>
+    							</tr>
+	    					</c:forEach>
+    						</tbody>
+    					</table>
+    				</div>
     			</div>
     		</div>
     		<div class="col-lg-5">
