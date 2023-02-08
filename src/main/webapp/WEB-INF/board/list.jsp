@@ -97,7 +97,9 @@
     						</div>
     						<div id="detailBtns" style="display: none;">
     							<button type="button" data-oper="list" class="btn btn-sm btn-primary">목록</button>
-    							<button type="button" data-oper="updateForm" class="btn btn-sm btn-warning">수정</button>
+    							<span id="update">
+    								<button type="button" data-oper="updateForm" class="btn btn-sm btn-warning">수정</button>
+    							</span>
     							<button type="button" data-oper="remove" class="btn btn-sm btn-success">삭제</button>
     						</div>
     					</form>
@@ -124,6 +126,12 @@
 			} else if (oper === 'remove') {
 				var idx = regForm.find("#idx").val();
 				location.href = "${contextPath}/remove?idx=" + idx;
+			} else if (oper === 'updateForm') {
+				regForm.find("#title").attr("readonly", false);
+				regForm.find("#content").attr("readonly", false);
+				
+				var updateBtn = '<button type="button" onclick="goUpdate()" class="btn btn-sm btn-info">수정완료</button>';
+				$("#update").html(updateBtn);
 			}
 		});
 		
@@ -153,11 +161,17 @@
 		regForm.find("#writer").val(vo.writer);
 		regForm.find("#idx").val(vo.idx);
 		
-		regForm.find("input").attr("readOnly", true);
-		regForm.find("textarea").attr("readOnly", true);
+		regForm.find("input").attr("readonly", true);
+		regForm.find("textarea").attr("readonly", true);
 		
 		$("#regBtns").css("display", "none");
 		$("#detailBtns").css("display", "block");
+	}
+	
+	function goUpdate() {
+		var regForm = $("#regForm");
+		regForm.attr("action", "${contextPath}/modify");
+		regForm.submit();
 	}
 </script>
 

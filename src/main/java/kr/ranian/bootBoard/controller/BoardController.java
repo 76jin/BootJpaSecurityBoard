@@ -48,5 +48,11 @@ public class BoardController {
 		boardService.remove(idx);
 		return "redirect:/list";
 	}
+	
+	@PostMapping("/modify")
+	public String modify (Board vo) {
+		boardService.modify(vo);
+		return "redirect:/list";
+	}
 
 }
