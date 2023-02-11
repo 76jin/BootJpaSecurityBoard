@@ -36,12 +36,12 @@
       <div class="card-group">
       	<div class="card bg-warning">
       		<div class="card-body text-center">
-      			<p class="card-text">글목록 보기</p>
+      			<p class="card-text"><a href="${contextPath}/board/list">글목록 보기</a></p>
       		</div>
       	</div>
       	<div class="card bg-danger">
       		<div class="card-body text-center">
-      			<p class="card-text">로그인</p>
+      			<p class="card-text"><a href="${contextPath}/member/login">로그인</a></p>
       		</div>
       	</div>
       </div>
