@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -34,19 +35,24 @@
     		<div class="col-lg-2">
     			<div class="card" style="min-height: 500px; max-height: 1000px">
     				<div class="card-body">
-    					<h4 class="card-title">GUEST</h4>
-    					<p class="card-text">회원님 Welcome!</p>
-    					<form id="loginForm" action="" method="post">
-    						<div class="form-group">
-    							<label for="memId">아이디</label>
-    							<input type="text" class="form-control" id="memId" name="memId" />
-    						</div>
-    						<div class="form-group">
-    							<label for="memPwd">비밀번호</label>
-    							<input type="password" class="form-control" id="memPwd" name="memPwd" />
-    						</div>
-    						<button type="button" class="btn btn-sm btn-primary form-control">로그인</button>
+    					<h4 class="card-title"><sec:authentication property="principal.member.name" /></h4>
+    					<p class="card-text">회원님 환영합니다!</p>
+    					<form action="${contextPath}/member/logout">
+    						<button type="submit" class="btn btn-sm btn-primary form-control">로그아웃</button>
     					</form>
+    					<br />
+    					<sec:authorize access="hasRole('ROLE_ADMIN')">
+    						<div><sec:authentication property="principal.member.role" /> Menu</div>
+    						- 메뉴 목록 -
+    					</sec:authorize>
+    					<sec:authorize access="hasRole('ROLE_MANAGER')">
+    						<div><sec:authentication property="principal.member.role" /> Menu</div>
+    						- 메뉴 목록 -
+    					</sec:authorize>
+    					<sec:authorize access="hasRole('ROLE_MEMBER')">
+    						<div><sec:authentication property="principal.member.role" /> Menu</div>
+    						- 메뉴 목록 -
+    					</sec:authorize>
     				</div>
     			</div>
     		</div>
@@ -75,7 +81,7 @@
     		<div class="col-lg-5">
     			<div class="card" style="min-height: 500px; max-height: 1000px">
     				<div class="card-body">
-    					<form id="regForm" action="${contextPath}/register" method="post">
+    					<form id="regForm" action="${contextPath}/board/register" method="post">
     					
     						<input type="hidden" id="idx" name="idx" value = "${vo.idx}" />
     					
@@ -89,7 +95,9 @@
     						</div>
     						<div class="form-group">
     							<label for="writer">작성자:</label>
-    							<input type="text" class="form-control" id="writer" name="writer" placeholder="작성자를 입력하세요." />
+    							<input type="text" class="form-control" id="writer" name="writer" 
+    									readonly="readonly"
+    									value='<sec:authentication property="principal.username"/>' />
     						</div>
     						<div id="regBtns">
     							<button type="button" data-oper="register" class="btn btn-sm btn-primary">등록</button>
@@ -122,10 +130,10 @@
 			} else if (oper === 'reset') {
 				regForm[0].reset();
 			} else if (oper === 'list') {
-				location.href = "${contextPath}/list";
+				location.href = "${contextPath}/board/list";
 			} else if (oper === 'remove') {
 				var idx = regForm.find("#idx").val();
-				location.href = "${contextPath}/remove?idx=" + idx;
+				location.href = "${contextPath}/board/remove?idx=" + idx;
 			} else if (oper === 'updateForm') {
 				regForm.find("#title").attr("readonly", false);
 				regForm.find("#content").attr("readonly", false);
@@ -141,7 +149,7 @@
 			var idx = $(this).attr('href');
 			
 			$.ajax({
-				url : '${contextPath}/get',
+				url : '${contextPath}/board/get',
 				type: 'get',
 				data : { 'idx': idx },
 				dataType : 'json',
@@ -170,7 +178,7 @@
 	
 	function goUpdate() {
 		var regForm = $("#regForm");
-		regForm.attr("action", "${contextPath}/modify");
+		regForm.attr("action", "${contextPath}/board/modify");
 		regForm.submit();
 	}
 </script>
