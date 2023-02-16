@@ -5,6 +5,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="user" value="${SPRING_SECURITY_CONTEXT.authentication.principal}" />
+<c:set var="auth" value="${SPRING_SECURITY_CONTEXT.authentication.authorities}" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -122,6 +124,9 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		// console.log('${user}');
+		
 		var regForm = $("#regForm");
 		$("button").on('click', function() {
 			var oper = $(this).data("oper");
