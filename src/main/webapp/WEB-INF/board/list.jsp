@@ -177,6 +177,15 @@
 		regForm.find("input").attr("readonly", true);
 		regForm.find("textarea").attr("readonly", true);
 		
+		if ('${user.username}' !== vo.writer) {
+			$("button[data-oper='updateForm']").attr("disabled", true);
+			$("button[data-oper='remove']").attr("disabled", true);
+		}
+		if ('${user.username}' === vo.writer) {
+			$("button[data-oper='updateForm']").attr("disabled", false);
+			$("button[data-oper='remove']").attr("disabled", false);
+		}
+		
 		$("#regBtns").css("display", "none");
 		$("#detailBtns").css("display", "block");
 	}
